@@ -1,213 +1,236 @@
-// ==========================================
-// CREAR ATUENDOS
-// ==========================================
-
 
 // ==========================================
-// CARGAR PRENDAS DEL CLÓSET
+// PRENDAS INICIALES
 // ==========================================
-console.log("ATUENDOS.JS ESTÁ FUNCIONANDO");
-let prendas =
-    JSON.parse(
-        localStorage.getItem("prendasCloset")
-    ) || [];
+
+const prendasIniciales = [
+    {
+        id: 1,
+        nombre: "Camisa blanca",
+        categoria: "superior",
+        color: "Blanco",
+        estilo: "casual",
+        imagen: "camisa-blanca.jpg"
+    },
+    {
+        id: 2,
+        nombre: "Jeans azul",
+        categoria: "inferior",
+        color: "Azul",
+        estilo: "casual",
+        imagen: "jeans-azul.jpg"
+    },
+    {
+        id: 3,
+        nombre: "Tenis blancos",
+        categoria: "zapatos",
+        color: "Blanco",
+        estilo: "casual",
+        imagen: "tenis-blancos.jpg"
+    },
+    {
+    id: 4,
+    nombre: "Tenis rojos",
+    categoria: "zapatos",
+    color: "Rojo",
+    estilo: "casual",
+    imagen: "tenis-rojos.jpg"
+},
+{
+    id: 5,
+    nombre: "Falda amarilla",
+    categoria: "inferior",
+    color: "Amarillo",
+    estilo: "casual",
+    imagen: "falda-amarilla.jpg"
+},
+{
+    id: 6,
+    nombre: "Botas negras",
+    categoria: "zapatos",
+    color: "Negro",
+    estilo: "casual",
+    imagen: "botas-negras.jpg"
+},
+{
+    id: 7,
+    nombre: "Sudadera gris",
+    categoria: "superior",
+    color: "Gris",
+    estilo: "casual",
+    imagen: "sudadera-gris.jpg"
+},
+{
+    id: 8,
+    nombre: "Bolsa negra",
+    categoria: "accesorio",
+    color: "Negro",
+    estilo: "formal",
+    imagen: "bolsa-negra.jpg"
+},
+{
+    id: 9,
+    nombre: "Blusa verde",
+    categoria: "superior",
+    color: "Verde",
+    estilo: "formal",
+    imagen: "blusa-verde.jpg"
+}, 
+{
+    id: 10,
+    nombre: "Gorra azul",
+    categoria: "accesorio",
+    color: "Azul",
+    estilo: "casual",
+    imagen: "gorra-azul.jpg"
+},
+{
+    id: 11,
+    nombre: "Chamarra negra",
+    categoria: "superior",
+    color: "Negro",
+    estilo: "casual",
+    imagen: "chamarra-negra.jpg"
+},
+{
+    id: 12,
+    nombre: "Pantalón negro",
+    categoria: "inferior",
+    color: "Negro",
+    estilo: "Formal",
+    imagen: "pantalon-negro.jpg"
+}
+];
+
+
+
+// ==========================================
+// CARGAR PRENDAS
+// ==========================================
+
+let prendasGuardadas = JSON.parse(
+    localStorage.getItem("prendasCloset")
+);
+
+let prendas = prendasGuardadas && prendasGuardadas.length
+    ? prendasGuardadas
+    : [...prendasIniciales];
 
 
 // ==========================================
 // ELEMENTOS
 // ==========================================
 
-const ocasion =
-    document.getElementById("ocasion");
-
-const estilo =
-    document.getElementById("estilo");
-
-const color =
-    document.getElementById("color");
-
-const botonCrear =
-    document.getElementById("crearAtuendo");
-
-const contenedor =
-    document.getElementById("prendasAtuendo");
-
-const mensaje =
-    document.getElementById("mensajeAtuendo");
+const contenedorPrendas = document.getElementById("contenedorPrendas");
+const mensajeVacio = document.getElementById("mensajeVacio");
+const contadorPrendas = document.getElementById("contadorPrendas");
+const buscador = document.getElementById("buscarPrenda");
+const filtroCategoria = document.getElementById("filtroCategoria");
+const formPrenda = document.getElementById("formPrenda");
 
 
 // ==========================================
-// CARGAR COLORES
+// GUARDAR
 // ==========================================
 
-function cargarColores() {
-
-    const colores = [
-        ...new Set(
-            prendas.map(
-                prenda => prenda.color
-            )
-        )
-    ];
-
-
-    colores.forEach(nombreColor => {
-
-        const opcion =
-            document.createElement("option");
-
-        opcion.value =
-            nombreColor.toLowerCase();
-
-        opcion.textContent =
-            nombreColor;
-
-        color.appendChild(opcion);
-
-    });
-
+function guardarPrendas() {
+    localStorage.setItem(
+        "prendasCloset",
+        JSON.stringify(prendas)
+    );
 }
 
 
 // ==========================================
-// CREAR ATUENDO
+// MOSTRAR PRENDAS
 // ==========================================
 
-function crearAtuendo() {
+function mostrarPrendas() {
 
-    const filtroOcasión =
-        ocasion.value;
+    contenedorPrendas.innerHTML = "";
 
-    const filtroEstilo =
-        estilo.value;
+    const textoBusqueda = buscador.value.toLowerCase();
+    const categoriaSeleccionada = filtroCategoria.value;
 
-    const filtroColor =
-        color.value;
+    const prendasFiltradas = prendas.filter(prenda => {
 
+        const coincideNombre =
+            prenda.nombre.toLowerCase().includes(textoBusqueda);
 
-    let disponibles =
-        prendas.filter(prenda => {
+        const coincideCategoria =
+            categoriaSeleccionada === "todas" ||
+            prenda.categoria === categoriaSeleccionada;
 
-
-            const coincideEstilo =
-                filtroEstilo === "todos" ||
-                prenda.estilo === filtroEstilo;
-
-
-            const coincideColor =
-                filtroColor === "todos" ||
-                prenda.color.toLowerCase() === filtroColor;
+        return coincideNombre && coincideCategoria;
+    });
 
 
-            return coincideEstilo && coincideColor;
+    contadorPrendas.textContent =
+        prendasFiltradas.length +
+        (prendasFiltradas.length === 1
+            ? " prenda"
+            : " prendas");
 
-        });
 
+    if (prendasFiltradas.length === 0) {
 
-    if (disponibles.length === 0) {
-
-        mensaje.textContent =
-            "No encontramos prendas que coincidan con tus preferencias. Intenta con otros filtros.";
-
-        contenedor.innerHTML = "";
-
+        mensajeVacio.style.display = "block";
         return;
     }
 
-
-    // ======================================
-    // BUSCAR UNA PRENDA POR CATEGORÍA
-    // ======================================
-
-    const superior =
-        disponibles.find(
-            prenda =>
-                prenda.categoria === "superior"
-        );
+    mensajeVacio.style.display = "none";
 
 
-    const inferior =
-        disponibles.find(
-            prenda =>
-                prenda.categoria === "inferior"
-        );
+    prendasFiltradas.forEach(prenda => {
+
+        const tarjeta = document.createElement("div");
+
+        tarjeta.className = "col-md-6 col-lg-4";
 
 
-    const zapatos =
-        disponibles.find(
-            prenda =>
-                prenda.categoria === "zapatos"
-        );
+        let imagenHTML = "";
 
+        if (prenda.imagen) {
 
-    const accesorios =
-        disponibles.find(
-            prenda =>
-                prenda.categoria === "accesorios"
-        );
+            imagenHTML = `
+                <img
+                    src="${prenda.imagen}"
+                    alt="${prenda.nombre}"
+                    class="clothing-image"
+                >
+            `;
 
+        } else {
 
-    const seleccionadas = [];
-
-
-    if (superior) {
-        seleccionadas.push(superior);
-    }
-
-    if (inferior) {
-        seleccionadas.push(inferior);
-    }
-
-    if (zapatos) {
-        seleccionadas.push(zapatos);
-    }
-
-    if (accesorios) {
-        seleccionadas.push(accesorios);
-    }
-
-
-    // ======================================
-    // MOSTRAR RESULTADO
-    // ======================================
-
-    contenedor.innerHTML = "";
-
-
-    seleccionadas.forEach(prenda => {
-
-        const tarjeta =
-            document.createElement("div");
-
-        tarjeta.className =
-            "col-md-6 col-lg-3";
+            imagenHTML = `
+                <div class="clothing-placeholder">
+                    ${obtenerNombreCategoria(prenda.categoria)}
+                </div>
+            `;
+        }
 
 
         tarjeta.innerHTML = `
 
-            <div class="outfit-item">
+            <div class="clothing-card">
 
-                <div class="outfit-placeholder">
+                ${imagenHTML}
 
-                    <span>
-                        ${obtenerCategoria(prenda.categoria)}
-                    </span>
+                <div class="clothing-info">
 
-                </div>
-
-                <div class="outfit-info">
-
-                    <h3>
-                        ${prenda.nombre}
-                    </h3>
-
-                    <p>
-                        ${prenda.color}
+                    <p class="clothing-category">
+                        ${obtenerNombreCategoria(prenda.categoria)}
                     </p>
 
-                    <small>
-                        ${prenda.estilo}
-                    </small>
+                    <h3>${prenda.nombre}</h3>
+
+                    <p class="clothing-details">
+                        Color: ${prenda.color}
+                    </p>
+
+                    <p class="clothing-details">
+                        Estilo: ${prenda.estilo}
+                    </p>
 
                 </div>
 
@@ -215,66 +238,99 @@ function crearAtuendo() {
 
         `;
 
-
-        contenedor.appendChild(tarjeta);
-
+        contenedorPrendas.appendChild(tarjeta);
     });
-
-
-    if (seleccionadas.length === 0) {
-
-        mensaje.textContent =
-            "No hay suficientes prendas para crear un atuendo.";
-
-    } else {
-
-        mensaje.textContent =
-            "Hemos creado una combinación con las prendas de tu clóset.";
-
-    }
-
 }
 
 
 // ==========================================
-// CATEGORÍA
+// CATEGORÍAS
 // ==========================================
 
-function obtenerCategoria(categoria) {
+function obtenerNombreCategoria(categoria) {
 
     if (categoria === "superior") {
-        return "SUPERIOR";
+        return "Parte superior";
     }
 
     if (categoria === "inferior") {
-        return "INFERIOR";
+        return "Parte inferior";
     }
 
     if (categoria === "zapatos") {
-        return "ZAPATOS";
+        return "Zapatos";
     }
 
     if (categoria === "accesorios") {
-        return "ACCESORIO";
+        return "Accesorios";
     }
 
-    return "PRENDA";
-
+    return "Prenda";
 }
 
 
 // ==========================================
-// BOTÓN
+// AGREGAR PRENDA
 // ==========================================
 
-botonCrear.addEventListener(
-    "click",
-    crearAtuendo
-);
+formPrenda.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const nombre = document.getElementById("nombrePrenda").value;
+    const categoria = document.getElementById("categoriaPrenda").value;
+    const color = document.getElementById("colorPrenda").value;
+    const estilo = document.getElementById("estiloPrenda").value;
+
+
+    const nuevaPrenda = {
+
+        id: Date.now(),
+
+        nombre: nombre,
+
+        categoria: categoria,
+
+        color: color,
+
+        estilo: estilo,
+
+        imagen: ""
+    };
+
+
+    prendas.push(nuevaPrenda);
+
+    guardarPrendas();
+
+    mostrarPrendas();
+
+    formPrenda.reset();
+
+
+    const modal = bootstrap.Modal.getInstance(
+        document.getElementById("modalPrenda")
+    );
+
+    if (modal) {
+        modal.hide();
+    }
+
+});
+
+
+// ==========================================
+// BUSCAR Y FILTRAR
+// ==========================================
+
+buscador.addEventListener("input", mostrarPrendas);
+
+filtroCategoria.addEventListener("change", mostrarPrendas);
 
 
 // ==========================================
 // INICIAR
 // ==========================================
 
-cargarColores();
+mostrarPrendas();
