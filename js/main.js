@@ -1,0 +1,1 @@
+console.log("Clóset Virtual iniciado correctamente.");
