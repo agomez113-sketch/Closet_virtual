@@ -1,0 +1,444 @@
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+    background-color: #f8f7f4;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar-closet {
+    background-color: #171717;
+    padding: 18px 0;
+}
+
+.navbar-brand {
+    letter-spacing: 2px;
+}
+
+.navbar-nav {
+    gap: 10px;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    padding: 8px 14px !important;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.hero-small,
+.section-small {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 60px;
+    line-height: 1.05;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.hero-text {
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 550px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-main {
+    background-color: #171717;
+    color: white;
+    padding: 13px 25px;
+    border-radius: 5px;
+}
+
+.btn-main:hover {
+    background-color: #333;
+    color: white;
+}
+
+.btn-outline-dark {
+    padding: 13px 25px;
+}
+
+
+/* =========================
+   TARJETA DEL HERO
+========================= */
+
+.hero-card {
+    background-color: #dedbd4;
+    min-height: 350px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-card h3 {
+    font-size: 35px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.hanger {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    padding: 90px 0;
+    background-color: white;
+}
+
+.features h2 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.feature-card {
+    height: 100%;
+    padding: 35px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.feature-number {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.feature-card h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+    min-height: 75px;
+}
+
+.feature-card a {
+    color: #111;
+    font-weight: bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background-color: #171717;
+    color: white;
+    padding: 35px 0;
+}
+
+.footer p {
+    margin-bottom: 8px;
+}
+
+.footer small {
+    color: #aaa;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero-card {
+        margin-top: 40px;
+    }
+
+    .features {
+        padding: 60px 0;
+    }
+
+}
+/* =========================
+   PÁGINA DEL CLÓSET
+========================= */
+
+.closet-page {
+    min-height: 650px;
+    background-color: #f8f7f4;
+}
+
+.page-title {
+    font-size: 55px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.page-description {
+    color: #666;
+    font-size: 17px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.closet-tools {
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #ddd;
+}
+
+.closet-subtitle {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+/* TARJETAS DE PRENDAS */
+
+.clothing-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.clothing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.clothing-placeholder {
+    height: 220px;
+    background-color: #e8e5df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.clothing-placeholder span {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.clothing-info {
+    padding: 25px;
+}
+
+.clothing-category {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+.clothing-info h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.clothing-details {
+    color: #666;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+
+/* CLÓSET VACÍO */
+
+.empty-closet {
+    display: none;
+    padding: 70px 20px;
+    background-color: white;
+    border: 1px dashed #bbb;
+}
+
+.empty-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #171717;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+}
+
+.empty-closet h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.empty-closet p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+
+/* MODAL */
+
+.modal-content {
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-header {
+    padding: 25px;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+}
+
+/* =========================
+   CREAR ATUENDO
+========================= */
+
+.outfit-page {
+    min-height: 700px;
+    background-color: #f8f7f4;
+}
+
+.outfit-settings {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 35px;
+    max-width: 900px;
+    margin: 0 auto 70px;
+}
+
+.outfit-settings label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.outfit-result {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.outfit-result h2 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.outfit-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.outfit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.outfit-placeholder {
+    height: 200px;
+    background-color: #e8e5df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.outfit-placeholder span {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.outfit-info {
+    padding: 20px;
+}
+
+.outfit-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.outfit-info p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.outfit-info small {
+    text-transform: capitalize;
+    color: #888;
+}
+
+.clothing-image {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+}
